@@ -7,7 +7,7 @@ import com.manish.mytask.NoteDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class NoteViewModel(private val noteDao: NoteDao) : ViewModel() {
+open class NoteViewModel(private val noteDao: NoteDao) : ViewModel() {
 
     val notes: Flow<List<Note>> = noteDao.getAllNotes()
     fun addNote(note: Note) {
