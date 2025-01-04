@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,7 +32,7 @@ fun AddNoteScreen(viewModel: NoteViewModel, navController: NavHostController) {
     Column(modifier = Modifier.padding(16.dp)) {
         TextField(modifier = Modifier.fillMaxWidth(), value = title, onValueChange = { title = it }, label = { Text("Title") })
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = {
+        Button(modifier = Modifier.align(Alignment.CenterHorizontally), onClick = {
             if (title.isNotBlank()) {
                 viewModel.addNote(Note(title = title))
                 navController.popBackStack()
