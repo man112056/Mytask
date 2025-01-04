@@ -4,44 +4,41 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.manish.mytask.ui.theme.MyTaskTheme
+import com.manish.mytask.viewmodel.NoteViewModel
+import com.manish.mytask.views.NoteScreen
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // Access the database instance and DAO
+        val database = DatabaseProvider.getDatabase(applicationContext)
+        val noteDao = database.noteDao()
+
+        // Create the ViewModel
+        val viewModel = NoteViewModel(noteDao)
+
+        // Set the content to NoteScreen
         setContent {
             MyTaskTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                Scaffold(topBar = {
+                    TopAppBar(title = { Text("My Task") })
+                }, content = { padding ->
+                    Column(modifier = Modifier.padding(padding)) {
+                        NoteScreen(viewModel = viewModel)
+                    }
+                })
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyTaskTheme {
-        Greeting("Android")
     }
 }
