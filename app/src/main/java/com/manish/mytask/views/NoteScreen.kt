@@ -2,6 +2,7 @@ package com.manish.mytask.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -96,8 +97,20 @@ fun NoteItem(note: Note, onDelete: (Note) -> Unit) {
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(note.title, style = MaterialTheme.typography.bodyMedium)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically // Align items vertically in the center
+        ) {
+            // Text for the note title
+            Text(
+                text = note.title,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.weight(1f) // weight to take up available space
+            )
+
+            // Button for deleting the note
             Button(onClick = { onDelete(note) }) {
                 Text("Delete")
             }
