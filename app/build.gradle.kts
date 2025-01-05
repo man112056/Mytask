@@ -63,8 +63,10 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.room.testing.android)
     kapt(libs.room.compiler)
 
+    testImplementation(libs.room.test)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

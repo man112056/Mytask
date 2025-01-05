@@ -34,7 +34,7 @@ fun AddNoteScreen(viewModel: NoteViewModel, navController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
         Button(modifier = Modifier.align(Alignment.CenterHorizontally), onClick = {
             if (title.isNotBlank()) {
-                viewModel.addNote(Note(title = title))
+                viewModel.addNote(Note(title = title, description = "default"))
                 navController.popBackStack()
             }
         }) {
