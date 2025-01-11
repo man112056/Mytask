@@ -6,7 +6,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.room.testing.MigrationTestHelper
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Assert.assertTrue
@@ -15,7 +14,6 @@ import org.junit.Before
 @RunWith(AndroidJUnit4::class)
 class MigrationTest {
 
-//        private val TEST_DB = "migration_test_db"
     private lateinit var database: SupportSQLiteDatabase
 
     @Before
@@ -26,6 +24,8 @@ class MigrationTest {
             NoteDatabase::class.java.canonicalName,
             FrameworkSQLiteOpenHelperFactory()
         ).createDatabase("test_db", 3)
+
+
     }
 
     @Test
